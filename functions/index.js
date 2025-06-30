@@ -1,13 +1,11 @@
-const { onRequest } = require('firebase-functions/v2/https');
-const logger = require('firebase-functions/logger');
+/*eslint-disable*/
 
-// Healthcheck para QA o Prod (la misma función para ambos ambientes)
-exports.healthcheck = onRequest((req, res) => {
-  logger.info("Healthcheck llamado", {structuredData: true});
-  // Puedes usar variables de entorno para diferenciar QA/Prod
-  res.status(200).json({
-    status: 'active',
-    environment: process.env.ENVIRONMENT || 'local',
-    timestamp: new Date().toISOString()
-  });
-});
+// Import the onRequest function from Firebase Functions v2 HTTP module
+const { onRequest } = require('firebase-functions/v2/https');
+// Import the logger for structured logging in Firebase Functions
+const logger = require('firebase-functions/logger');
+// Import the Express app instance
+const app = require('./app');
+
+// Export the Express app as a single HTTPS Cloud Function
+exports.app = onRequest(app);
