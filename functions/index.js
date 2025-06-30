@@ -1,19 +1,13 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const { onRequest } = require('firebase-functions/v2/https');
+const logger = require('firebase-functions/logger');
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+// Healthcheck para QA o Prod (la misma función para ambos ambientes)
+exports.healthcheck = onRequest((req, res) => {
+  logger.info("Healthcheck llamado", {structuredData: true});
+  // Puedes usar variables de entorno para diferenciar QA/Prod
+  res.status(200).json({
+    status: 'active',
+    environment: process.env.ENVIRONMENT || 'local',
+    timestamp: new Date().toISOString()
+  });
+});
