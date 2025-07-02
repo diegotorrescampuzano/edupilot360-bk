@@ -7,11 +7,12 @@ const authMiddleware = require('../../../middleware/auth.middleware');
 
 // Import controllers
 const createUser = require('../controllers/createUser.controller');
-// const getUser = require('../controllers/getUser.controller');
+const getUserByIdentifier = require('../controllers/getUserByIdentifier.controller');
 
-// Protect the POST route with authentication middleware
+// POST /v1/users - Crear usuario (protegido)
 router.post('/', authMiddleware, createUser);
 
-// router.get('/', getUser);
+// GET /v1/users/:identifier?by=firebaseUid|_id|email - Obtener usuario por identificador (protegido)
+router.get('/:identifier', authMiddleware, getUserByIdentifier);
 
 module.exports = router;
