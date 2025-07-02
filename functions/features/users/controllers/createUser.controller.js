@@ -4,6 +4,8 @@
 const { connectToMongo } = require('../../../db');
 // Import the User model
 const User = require('../user.model');
+// Import Firebase Functions logger for structured logging
+const logger = require('firebase-functions/logger');
 
 // Async function to handle user creation requests
 module.exports = async (req, res) => {
@@ -11,14 +13,17 @@ module.exports = async (req, res) => {
     // Establish connection to MongoDB
     await connectToMongo();
     
+    // Use Firebase UID from the verified token
+    const firebaseUid = req.user.uid;
+    
     // Validate required fields
-    if (!req.body.firebaseUid || !req.body.email) {
-      return res.status(400).json({ error: "firebaseUid and email are required" });
+    if (!firebaseUid || !req.body.email) {
+      return res.status(400).json({ error: "Email is required" });
     }
 
     // Create a new User instance with request data
     const newUser = new User({
-      firebaseUid: req.body.firebaseUid,  // Unique Firebase UID
+      firebaseUid,  // Taken from the verified token
       name: req.body.name,                 // User's full name
       email: req.body.email,               // User's email (unique)
       phone: req.body.phone,               // User's phone number
@@ -29,7 +34,8 @@ module.exports = async (req, res) => {
     // Save the new user to the database
     const savedUser = await newUser.save();
     
-    // Return the created user with 201 status
+    // Log successful creation
+    logger.info('User created', { userId: savedUser._id, firebaseUid });
     res.status(201).json(savedUser);
   } catch (error) {
     // Handle duplicate key errors (MongoDB error code 11000)
@@ -40,7 +46,8 @@ module.exports = async (req, res) => {
         error: `${duplicatedField} already exists in the database` 
       });
     }
-    // Handle all other errors with 500 status
+    // Log and handle all other errors
+    logger.error('User creation error', { error: error.message });
     res.status(500).json({ error: error.message });
   }
 };

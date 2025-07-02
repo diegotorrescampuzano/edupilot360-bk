@@ -14,6 +14,14 @@ const usersRoutes = require('./features/users/routes/users.routes');
 // const sedesRoutes = require('./features/sedes/routes/sedes.routes');
 // const userRolesRoutes = require('./features/user_roles/routes/userRoles.routes');
 
+// Route to get environment variables
+app.get('/env', (req, res) => {
+  res.json({
+    project: process.env.GCLOUD_PROJECT,
+    mongoUri: process.env.MONGO_URI ? '***REDACTED***' : 'undefined'
+  });
+});
+
 // Mount the user routes under the '/users' path
 app.use('/users', usersRoutes);
 // Mount other feature routes under their respective paths (uncomment when ready)
