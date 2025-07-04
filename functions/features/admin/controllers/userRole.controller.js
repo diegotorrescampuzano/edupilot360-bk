@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Controllers for user_roles endpoints
+// Controller for user_roles GET endpoint with grouped userInfo and userRoles
 
 const { connectToMongo } = require('../../../db');
 const UserRole = require('../userRole.model');
@@ -46,13 +46,36 @@ exports.getUserRolesByUserId = async (req, res) => {
       return res.status(400).json({ error: 'Missing userId param' });
     }
 
-    // Populate role and campus fields for full info
+    // 1. Get user info (all fields)
+    const user = await User.findById(userId).lean();
+    if (!user) {
+      logger.warn('User not found for user_roles', { userId });
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // 2. Get all user_roles for this user, populate role and campus
     const relations = await UserRole.find({ userId })
       .populate('roleId')
-      .populate('campusId');
+      .populate('campusId')
+      .lean();
 
-    logger.info('UserRole relations fetched for user', { userId, count: relations.length });
-    res.status(200).json({ data: relations });
+    // 3. Build userRoles array with roleInfo and campusInfo
+    const userRoles = relations.map(rel => ({
+      _id: rel._id,
+      roleInfo: rel.roleId,
+      campusInfo: rel.campusId,
+      createdAt: rel.createdAt
+    }));
+
+    logger.info('UserRole relations fetched for user (grouped)', { userId, count: userRoles.length });
+
+    // 4. Return in the requested structure
+    res.status(200).json({
+      data: {
+        userInfo: user,
+        userRoles
+      }
+    });
   } catch (error) {
     logger.error('UserRole fetch error', { error: error.message });
     res.status(500).json({ error: error.message });

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Controllers for permissions endpoints
+// Controller for permissions endpoints (flat array, all fields, no grouping)
 
 const { connectToMongo } = require('../../../db');
 const Permission = require('../permission.model');
@@ -40,30 +40,16 @@ exports.createOrUpdatePermission = async (req, res) => {
   }
 };
 
-// List all permissions grouped by category and sorted by name
-exports.listPermissionsGrouped = async (req, res) => {
+// List all permissions as a flat array, sorted by category and name
+exports.listPermissionsFlat = async (req, res) => {
   try {
     await connectToMongo();
 
-    // Aggregate by category, sort by name
-    const permissions = await Permission.aggregate([
-      { $sort: { category: 1, name: 1 } },
-      {
-        $group: {
-          _id: '$category',
-          permissions: {
-            $push: {
-              key: '$key',
-              name: '$name',
-              description: '$description'
-            }
-          }
-        }
-      },
-      { $project: { category: '$_id', permissions: 1, _id: 0 } }
-    ]);
+    // Find all permissions, sort by category and name
+    const permissions = await Permission.find().sort({ category: 1, name: 1 }).lean();
 
-    logger.info('Permissions listed (grouped by category)');
+    logger.info('Permissions listed (flat, all fields)', { count: permissions.length });
+
     res.status(200).json({ data: permissions });
   } catch (error) {
     logger.error('Permission list error', { error: error.message });

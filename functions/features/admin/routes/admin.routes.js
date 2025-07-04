@@ -13,7 +13,7 @@ const userRoleCtrl = require('../controllers/userRole.controller');
 
 // Permissions endpoints
 router.post('/permissions', authMiddleware, permissionCtrl.createOrUpdatePermission);
-router.get('/permissions', authMiddleware, permissionCtrl.listPermissionsGrouped);
+router.get('/permissions', authMiddleware, permissionCtrl.listPermissionsFlat);
 
 // Roles endpoints
 router.post('/roles', authMiddleware, roleCtrl.createOrUpdateRole);
@@ -21,7 +21,7 @@ router.get('/roles', authMiddleware, roleCtrl.listRolesSorted);
 
 // Campuses endpoints
 router.post('/campuses', authMiddleware, campusCtrl.createOrUpdateCampus);
-router.get('/campuses', authMiddleware, campusCtrl.listCampusesGrouped);
+router.get('/campuses', authMiddleware, campusCtrl.listCampusesFlat);
 
 // UserRole endpoints
 router.post('/user_roles', authMiddleware, userRoleCtrl.createUserRoleRelation);

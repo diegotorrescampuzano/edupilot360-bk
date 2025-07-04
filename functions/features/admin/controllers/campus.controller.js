@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Controllers for campuses endpoints
+// Controller for campuses endpoints (flat array, all fields, no grouping)
 
 const { connectToMongo } = require('../../../db');
 const Campus = require('../campus.model');
@@ -40,30 +40,16 @@ exports.createOrUpdateCampus = async (req, res) => {
   }
 };
 
-// List all campuses grouped by type and sorted by name
-exports.listCampusesGrouped = async (req, res) => {
+// List all campuses as a flat array, sorted by type and name
+exports.listCampusesFlat = async (req, res) => {
   try {
     await connectToMongo();
 
-    // Aggregate by type, sort by name
-    const campuses = await Campus.aggregate([
-      { $sort: { type: 1, name: 1 } },
-      {
-        $group: {
-          _id: '$type',
-          campuses: {
-            $push: {
-              customId: '$customId',
-              name: '$name',
-              address: '$address'
-            }
-          }
-        }
-      },
-      { $project: { type: '$_id', campuses: 1, _id: 0 } }
-    ]);
+    // Find all campuses, sort by type and name
+    const campuses = await Campus.find().sort({ type: 1, name: 1 }).lean();
 
-    logger.info('Campuses listed (grouped by type)');
+    logger.info('Campuses listed (flat, all fields)', { count: campuses.length });
+
     res.status(200).json({ data: campuses });
   } catch (error) {
     logger.error('Campus list error', { error: error.message });
