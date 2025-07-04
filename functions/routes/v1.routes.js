@@ -9,10 +9,10 @@ const router = express.Router();
 
 // Import feature routers
 const usersRoutes = require('../features/users/routes/users.routes');
+const adminRoutes = require('../features/admin/routes/admin.routes'); // NEW
 
 // Mount user routes under /users (e.g., /v1/users)
 router.use('/users', usersRoutes);
-
-// Add future v1 feature routers here
+router.use('/admin', adminRoutes); // Mount admin group under /v1/admin
 
 module.exports = router;
