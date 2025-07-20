@@ -1,0 +1,19 @@
+type: environment.insomnia.rest/5.0
+name: EduPilot360 Env Vars
+meta:
+  id: wrk_73981bb058964332a0cb9ce1c91860fe
+  created: 1751494537250
+  modified: 1751494537250
+  description: ""
+environments:
+  name: Base Environment
+  meta:
+    id: env_e24c172a239300222badf904337df58c0716828f
+    created: 1751494537284
+    modified: 1753031483439
+    isPrivate: false
+  data:
+    hostname:
+      qa: us-central1-edupilot360-stage.cloudfunctions.net
+      prod: us-central1-attendify-app-kirpalamar.cloudfunctions.net
+    fb_token: eyJhbGciOiJSUzI1NiIsImtpZCI6IjZkZTQwZjA0ODgxYzZhMDE2MTFlYjI4NGE0Yzk1YTI1MWU5MTEyNTAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZWR1cGlsb3QzNjAtc3RhZ2UiLCJhdWQiOiJlZHVwaWxvdDM2MC1zdGFnZSIsImF1dGhfdGltZSI6MTc1Mjk0NTU5MiwidXNlcl9pZCI6IlI0UnMxZFVRcVZNdzVSZ0YyTVR5bElOd0ZpTTIiLCJzdWIiOiJSNFJzMWRVUXFWTXc1UmdGMk1UeWxJTndGaU0yIiwiaWF0IjoxNzUzMDMxNDYzLCJleHAiOjE3NTMwMzUwNjMsImVtYWlsIjoicGFxdWl0YUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicGFxdWl0YUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.NhaGmYfLOYNBnoXevjHjn1Pj9lAd2aRAbt7VmqQUmtKn89nor_wXfMoP2_cqvK7ruS2qer1kbLcqQKN-Kfd_XW3JDY2F0OQsBHgxvslluJ2mAlntDk-ZETkUALUlLq843rr33IaECSUXxalQcvltSWRrTecVNxW60_eouJG2dWKw1cEuXYS5gTdXCBeAzK7z8S_u0yotQrT-HtMoBGBGU2aOCpk-BH9pLFCmNgnVuZ5297o1Gt5lvbQuCLrDxsQkvtHLLkeA2VUg5ZPqY4sT6EpR1GI-DXL9ShF2aOzpMa78eDmXP5dDU2Q4miVwGwHstqGFwpgxG4SV3sShm6BbcQ

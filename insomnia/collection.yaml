@@ -1,0 +1,591 @@
+type: collection.insomnia.rest/5.0
+name: EduPilot360 - Firebase Functions
+meta:
+  id: wrk_406d4f950301458180be7c2e2af384aa
+  created: 1751316885384
+  modified: 1751316885384
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_bc4f9b14b40f4cf79cbedafd0ec3f163
+      created: 1751316897146
+      modified: 1751316897146
+      sortKey: -1751316897146
+      description: ""
+    children:
+      - url: https://{{ _.hostname.qa }}/app/v1/users
+        name: Create User
+        meta:
+          id: req_e7bce282e5fa46458a99b5946221f788
+          created: 1751316915954
+          modified: 1753032803124
+          isPrivate: false
+          description: |
+            {
+              "firebaseUid": "R4Rs1dUQqVMw5RgF2MTylINwFiM2",
+              "name": "Paquita la del barrio",
+              "email": "paquita@gmail.com",
+              "phone": "3001234567",
+              "address": "Calle 123, Arbeláez",
+              "status": "inactive"
+            }
+          sortKey: -1751316915954
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "firebaseUid": "1234567890",
+              "name": "Juan Rico",
+              "email": "JUANITO@gmail.com",
+              "phone": "3201344567",
+              "address": "Calle 256, Pasca",
+              "status": "active"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_041ab6efeab6460896cdd230d038aece
+          - id: pair_4bab351f73cb41b4a464115a0e712ba0
+            name: Authorization
+            value: Bearer {{ _.fb_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://{{ _.hostname.qa }}/app/v1/users/R4Rs1dUQqVMw5RgF2MTylINwFiM2
+        name: Get User By Identifier
+        meta:
+          id: req_2abda7252d8b47fe9e29c3bb4b27d625
+          created: 1751492942401
+          modified: 1751581214005
+          isPrivate: false
+          description: ""
+          sortKey: -1750648097271.25
+        method: GET
+        parameters:
+          - id: pair_d839a15a68ca430e86a8e51176757f9c
+            name: by
+            value: email
+            description: ""
+            disabled: true
+          - id: pair_9bf79e8846a94674b9a68e42265b6111
+            name: by
+            value: firebaseUid
+            description: ""
+            disabled: false
+          - id: pair_3ced798028e34a71a74960d40f494b8b
+            name: by
+            value: _id
+            description: ""
+            disabled: true
+        headers:
+          - id: pair_4bab351f73cb41b4a464115a0e712ba0
+            name: Authorization
+            value: Bearer {{ _.fb_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://{{ _.hostname.qa }}/app/v1/users/search/all
+        name: Get All Users (Multiple Criteria)
+        meta:
+          id: req_e33f703bb19941bba58cdacde7879c7a
+          created: 1752949257937
+          modified: 1752949775611
+          isPrivate: false
+          description: ""
+          sortKey: -1749644869247.125
+        method: GET
+        parameters:
+          - id: pair_d839a15a68ca430e86a8e51176757f9c
+            name: email
+            value: paqui
+            description: ""
+            disabled: true
+          - id: pair_e1cf51fa84f54b018ddc83fdd074a9d1
+            name: name
+            value: Barrio
+            description: ""
+            disabled: true
+          - id: pair_86971ebef76842fe8d5a8705fa07c69b
+            name: firebaseUid
+            value: R4Rs
+            description: ""
+            disabled: true
+          - id: pair_2a5d65f9c0d743ee842c3ededdbc1273
+            name: address
+            value: calle
+            description: ""
+            disabled: true
+          - id: pair_9b3719be61f643198d98dad07a573e4b
+            name: status
+            value: active
+            description: ""
+            disabled: false
+        headers:
+          - id: pair_4bab351f73cb41b4a464115a0e712ba0
+            name: Authorization
+            value: Bearer {{ _.fb_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://{{ _.hostname.qa }}/app/v1/users/6865a90292154dd54f9d5d53
+        name: Update User
+        meta:
+          id: req_8124267a7fe346d581bb37d0ce19b753
+          created: 1753031445282
+          modified: 1753031716924
+          isPrivate: false
+          description: |
+            {
+              "firebaseUid": "R4Rs1dUQqVMw5RgF2MTylINwFiM2",
+              "name": "Paquita la del barrio",
+              "email": "paquita@gmail.com",
+              "phone": "3001234567",
+              "address": "Calle 123, Arbeláez",
+              "status": "inactive"
+            }
+          sortKey: -1751316906600
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Paquita de la barriada",
+            	"status": "active"
+            }
+        parameters:
+          - id: pair_27e4d39f2ace44a387f52352d62c2c79
+            name: by
+            value: email
+            description: ""
+            disabled: true
+          - id: pair_503b57ba033843d79d224a473f8b69a6
+            name: by
+            value: firebaseUid
+            description: ""
+            disabled: true
+          - id: pair_66420d1817d445d7817b299c20a141a8
+            name: by
+            value: _id
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_041ab6efeab6460896cdd230d038aece
+          - id: pair_4bab351f73cb41b4a464115a0e712ba0
+            name: Authorization
+            value: Bearer {{ _.fb_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://{{ _.hostname.qa }}/app/v1/users/687d28642fc21ecab78739c0
+        name: Delete User
+        meta:
+          id: req_8c8e521a6df34e2fadb95065497c93f5
+          created: 1753033348424
+          modified: 1753033385177
+          isPrivate: false
+          description: ""
+          sortKey: -1750982501935.625
+        method: DELETE
+        parameters:
+          - id: pair_63b9eb72bd894fd0a3c79e2c741faab7
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - id: pair_4bab351f73cb41b4a464115a0e712ba0
+            name: Authorization
+            value: Bearer {{ _.fb_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Admin
+    meta:
+      id: fld_5ab217da397a4215a2a8d393537bfc89
+      created: 1751579734797
+      modified: 1751579734797
+      sortKey: -1751579734797
+      description: ""
+    children:
+      - name: Permissions
+        meta:
+          id: fld_8f69cbe2593e4b2ba263e374c070f8dd
+          created: 1751579768781
+          modified: 1751579768781
+          sortKey: -1751579768781
+          description: ""
+        children:
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/permissions
+            name: Create Permission
+            meta:
+              id: req_ea8fa1de091945af87c40fe08d781cd8
+              created: 1751579752030
+              modified: 1751580044344
+              isPrivate: false
+              description: >
+                {
+                  "key": "edit_grade",
+                  "name": "Editar Nota",
+                  "description": "Permite modificar las calificaciones de los estudiantes.",
+                  "category": "Notas"
+                }
+              sortKey: -1751579776688
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "key": "edit_user",
+                  "name": "Editar Usuarios",
+                  "description": "Permite modificar usuarios del sistema.",
+                  "category": "Usuarios"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_041ab6efeab6460896cdd230d038aece
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/permissions
+            name: Get Permissions
+            meta:
+              id: req_055df1e1ad0247f4975c4ba9f237a662
+              created: 1751580209996
+              modified: 1751580229625
+              isPrivate: false
+              description: "\n"
+              sortKey: -1751448346321
+            method: GET
+            headers:
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Roles
+        meta:
+          id: fld_d2948347a31b4e4a9af3c8c79e3ac016
+          created: 1751580282075
+          modified: 1751580282075
+          sortKey: -1751580282075
+          description: ""
+        children:
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/roles
+            name: Create Role
+            meta:
+              id: req_320f6204ab5c4720a9cbac0684e5fe1f
+              created: 1751580293367
+              modified: 1751596437620
+              isPrivate: false
+              description: >
+                {
+                  "customId": "coordinador_academico",
+                  "name": "Coordinador Académico",
+                  "description": "Rol para el coordinador académico del colegio.",
+                  "permissions": [
+                    "view_class",
+                    "edit_grade",
+                    "view_observer"
+                  ]
+                }
+              sortKey: -1751580449372
+            method: POST
+            body:
+              mimeType: application/json
+              text: >
+                {
+                  "customId": "coordinador_academico",
+                  "name": "Coordinador Académico",
+                  "description": "Rol para el coordinador académico del colegio.",
+                  "permissions": [
+                    "view_class",
+                    "edit_grade",
+                    "view_observer"
+                  ]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_041ab6efeab6460896cdd230d038aece
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/roles
+            name: Get Roles
+            meta:
+              id: req_13fdf14724aa42ec957d1b9eee93b0e8
+              created: 1751580649492
+              modified: 1751580661065
+              isPrivate: false
+              description: "\n"
+              sortKey: -1751580449172
+            method: GET
+            headers:
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Campuses
+        meta:
+          id: fld_f36e7d8c1bc9423bae861fbd1ebb63c9
+          created: 1751580895504
+          modified: 1751580895504
+          sortKey: -1751580895504
+          description: ""
+        children:
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/campuses
+            name: Create Campus
+            meta:
+              id: req_437b39ab0a844740872d76bb2047df03
+              created: 1751580908286
+              modified: 1751596360970
+              isPrivate: false
+              description: |+
+                {
+                  "customId": "S001-URB",
+                  "name": "Sede Urbana",
+                  "address": "Carrera 5 #10-20, Arbeláez",
+                  "type": "urbana"
+                }
+
+              sortKey: -1751580913055
+            method: POST
+            body:
+              mimeType: application/json
+              text: |
+                {
+                  "customId": "S001-URB",
+                  "name": "Sede Urbana 2",
+                  "address": "Carrera 2 #10-20, Pasca",
+                  "type": "urbana"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_041ab6efeab6460896cdd230d038aece
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/campuses
+            name: Get Campuses
+            meta:
+              id: req_fc1133ed8bfe4b828d7982ce20aeb45c
+              created: 1751581011554
+              modified: 1751581025720
+              isPrivate: false
+              description: "\n"
+              sortKey: -1751580912955
+            method: GET
+            headers:
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: User Roles
+        meta:
+          id: fld_cb367d51cf5342ad9841d3046aa0380a
+          created: 1751581097700
+          modified: 1751581097700
+          sortKey: -1751581097700
+          description: ""
+        children:
+          - url: https://{{ _.hostname.qa }}/app/v1/admin/user_roles
+            name: Create User Role
+            meta:
+              id: req_77ed8b52f58441ac83c1d8294636f254
+              created: 1751581112684
+              modified: 1751596535899
+              isPrivate: false
+              description: |+
+                {
+                  "customId": "S001-URB",
+                  "name": "Sede Urbana",
+                  "address": "Carrera 5 #10-20, Arbeláez",
+                  "type": "urbana"
+                }
+
+              sortKey: -1751581116387
+            method: POST
+            body:
+              mimeType: application/json
+              text: |
+                {
+                  "userId": "6865a90292154dd54f9d5d53",
+                  "roleId": "68673d93e9aa68d8231f809b",
+                  "campusId": "68673d48e9aa68d8231f8095"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_041ab6efeab6460896cdd230d038aece
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://{{ _.hostname.qa
+              }}/app/v1/admin/user_roles/6865a90292154dd54f9d5d53
+            name: Get User Roles by userId
+            meta:
+              id: req_60fd30e9d5e444de8cef0a15d834f130
+              created: 1751591916623
+              modified: 1751594522905
+              isPrivate: false
+              description: "\n"
+              sortKey: -1751581116287
+            method: GET
+            headers:
+              - id: pair_4bab351f73cb41b4a464115a0e712ba0
+                name: Authorization
+                value: Bearer {{ _.fb_token }}
+                description: ""
+                disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+  - url: https://{{ _.hostname.qa }}/app/healthcheck
+    name: Healthcheck
+    meta:
+      id: req_98914627a04c4d1e9967ec1f29d7aabd
+      created: 1751423053235
+      modified: 1751579724199
+      isPrivate: false
+      description: ""
+      sortKey: -1751316897246
+    method: GET
+    headers:
+      - id: pair_76ffd7eaeb9b48c3a2ff54ffc4630b9d
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_031386416ccdcd6aa79316f67957f756e2856630
+    created: 1751316885417
+    modified: 1751316885417
+environments:
+  name: Base Environment
+  meta:
+    id: env_031386416ccdcd6aa79316f67957f756e2856630
+    created: 1751316885402
+    modified: 1751316885402
+    isPrivate: false
