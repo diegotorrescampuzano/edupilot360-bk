@@ -13,29 +13,26 @@ module.exports = async (req, res) => {
     // Establish connection to MongoDB
     await connectToMongo();
 
-    // Use Firebase UID from the verified token
-    const firebaseUid = req.user.uid;
-
     // Validate required fields
-    if (!firebaseUid || !req.body.email) {
-      return res.status(400).json({ error: "Email is required" });
+    if (!req.body.firebaseUid || !req.body.email) {
+      return res.status(400).json({ error: "Firebase UID and Email are required" });
     }
 
     // Do NOT use firebaseUid for any other field except firebaseUid
     // All other fields come from req.body
     const newUser = new User({
-      firebaseUid,                    // Only for firebaseUid field
-      name: req.body.name,            // User's full name
-      email: req.body.email,          // User's email (unique)
-      phone: req.body.phone,          // User's phone number
-      address: req.body.address,      // Physical address
+      firebaseUid: req.body.firebaseUid,  // User's Firebase UID
+      name: req.body.name,                // User's full name
+      email: req.body.email,              // User's email (unique)
+      phone: req.body.phone,              // User's phone number
+      address: req.body.address,          // Physical address
       status: req.body.status || 'active' // Default to 'active' if not provided
     });
 
     // Save the new user to the database
     const savedUser = await newUser.save();
 
-    logger.info('User created', { userId: savedUser._id, firebaseUid });
+    logger.info('User created', { userId: savedUser._id });
     // Respond with standard JSON API format
     res.status(201).json({ data: savedUser });
   } catch (error) {
